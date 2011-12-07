@@ -50,7 +50,8 @@
 ;; Install the process communication commands in the clojure-mode keymap.
 (define-key clojure-mode-map (kbd "M-C-x")  'clojure-send-definition) ;gnu convention
 (define-key clojure-mode-map (kbd "C-x C-e") 'clojure-send-last-sexp) ;gnu convention
-(define-key clojure-mode-map (kbd "C-c C-d") 'clojure-document)
+(define-key clojure-mode-map (kbd "C-c d")   'clojure-document)
+(define-key clojure-mode-map (kbd "C-c C-d") 'clojure-find-document)
 (define-key clojure-mode-map (kbd "C-c C-e") 'clojure-send-definition)
 (define-key clojure-mode-map (kbd "C-c C-c") 'clojure-send-definition)
 (define-key clojure-mode-map (kbd "C-c M-e") 'clojure-send-definition-and-go)
@@ -118,8 +119,14 @@ Defaults to a regexp ignoring all inputs of 0, 1, or 2 letters."
 
 (defun clojure-document (symbol)
   (interactive
-   (list (read-string "Document: " (thing-at-point 'symbol))))
+   (list (read-string "doc: " (thing-at-point 'symbol))))
   (let ((doc-command (format "(doc %s)\n" symbol)))
+    (comint-send-string (clojure-proc) doc-command)))
+
+(defun clojure-find-document (symbol)
+  (interactive
+   (list (read-string "finddoc: " (thing-at-point 'symbol))))
+  (let ((doc-command (format "(find-doc \"%s\")\n" symbol)))
     (comint-send-string (clojure-proc) doc-command)))
 
 (defun clojure-send-last-sexp ()
