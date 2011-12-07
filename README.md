@@ -24,7 +24,8 @@ Key bindings of inf-clojure is similar to other inferior modes.
 | Key binding | Command                          |
 |:-----------:|:---------------------------------|
 |  C-x C-e    |  clojure-send-last-sexp          |
-|  C-c C-d    |  clojure-document                |
+|  C-c d      |  clojure-document                |
+|  C-c C-d    |  clojure-find-document           |
 |  C-c C-e    |  clojure-send-definition         |
 |  C-c C-c    |  clojure-send-definition         |
 |  C-c M-e    |  clojure-send-definition-and-go  |
